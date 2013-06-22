@@ -25,8 +25,6 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIKit.h>
 #import "UIView+MCLayout.h"
 
 @implementation UIView (MCLayout)
@@ -46,7 +44,7 @@
 - (void)mc_setWidth:(CGFloat)value
 {
 	CGRect frame = [self frame];
-	frame.size.width = round(value);
+	frame.size.width = roundf(value);
 	[self setFrame:frame];
 }
 
