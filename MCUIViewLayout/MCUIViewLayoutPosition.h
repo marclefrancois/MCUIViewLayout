@@ -1,4 +1,4 @@
-// Copyright (c) 2013, Mirego
+// Copyright (c) 2014, Mirego
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -27,35 +27,37 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_OPTIONS(NSInteger, MCViewPosition) {
-    MCViewPositionToTheLeft        = (0x1 << 0),
-    MCViewPositionLeft             = (0x1 << 1),
+    MCViewPositionToTheLeft = (0x1 << 0),
+    MCViewPositionLeft = (0x1 << 1),
     MCViewPositionHorizontalCenter = (0x1 << 2),
-    MCViewPositionRight            = (0x1 << 3),
-    MCViewPositionToTheRight       = (0x1 << 4),
+    MCViewPositionRight = (0x1 << 3),
+    MCViewPositionToTheRight = (0x1 << 4),
 
-    MCViewPositionAbove            = (0x1 << 5),
-    MCViewPositionTop              = (0x1 << 6),
-    MCViewPositionVerticalCenter   = (0x1 << 7),
-    MCViewPositionBottom           = (0x1 << 8),
-    MCViewPositionUnder            = (0x1 << 9),
+    MCViewPositionAbove = (0x1 << 5),
+    MCViewPositionTop = (0x1 << 6),
+    MCViewPositionVerticalCenter = (0x1 << 7),
+    MCViewPositionBottom = (0x1 << 8),
+    MCViewPositionUnder = (0x1 << 9),
 
-    MCViewPositionFitWidth         = (0x1 << 20),
-    MCViewPositionFitHeight         = (0x1 << 21),
+    MCViewPositionFitWidth = (0x1 << 20),
+    MCViewPositionFitHeight = (0x1 << 21),
 
     // Position inside another rect
-    MCViewPositionTopLeft       = MCViewPositionTop | MCViewPositionLeft,
-    MCViewPositionTopHCenter    = MCViewPositionTop | MCViewPositionHorizontalCenter,
-    MCViewPositionTopRight      = MCViewPositionTop | MCViewPositionRight,
 
-    MCViewPositionBottomLeft    = MCViewPositionBottom | MCViewPositionLeft,
+    MCViewPositionTopLeft = MCViewPositionTop | MCViewPositionLeft,
+    MCViewPositionTopHCenter = MCViewPositionTop | MCViewPositionHorizontalCenter,
+    MCViewPositionTopRight = MCViewPositionTop | MCViewPositionRight,
+
+    MCViewPositionBottomLeft = MCViewPositionBottom | MCViewPositionLeft,
     MCViewPositionBottomHCenter = MCViewPositionBottom | MCViewPositionHorizontalCenter,
-    MCViewPositionBottomRight   = MCViewPositionBottom | MCViewPositionRight,
+    MCViewPositionBottomRight = MCViewPositionBottom | MCViewPositionRight,
 
-    MCViewPositionVCenterLeft   = MCViewPositionVerticalCenter | MCViewPositionLeft,
-    MCViewPositionCenters       = MCViewPositionVerticalCenter | MCViewPositionHorizontalCenter,
-    MCViewPositionVCenterRight  = MCViewPositionVerticalCenter | MCViewPositionRight,
+    MCViewPositionVCenterLeft = MCViewPositionVerticalCenter | MCViewPositionLeft,
+    MCViewPositionCenters = MCViewPositionVerticalCenter | MCViewPositionHorizontalCenter,
+    MCViewPositionVCenterRight = MCViewPositionVerticalCenter | MCViewPositionRight,
 
     // Position outside another rect
+
     MCViewRelativePositionAboveAlignedLeft = MCViewPositionAbove | MCViewPositionLeft,
     MCViewRelativePositionAboveCentered = MCViewPositionAbove | MCViewPositionHorizontalCenter,
     MCViewRelativePositionAboveAlignedRight = MCViewPositionAbove | MCViewPositionRight,
