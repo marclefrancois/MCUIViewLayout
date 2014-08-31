@@ -26,12 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
-#import <Foundation/Foundation.h>
+BOOL rectEquals(CGFloat expectedX, CGFloat expectedY, CGFloat expectedWidth, CGFloat expectedHeight, CGRect rectToValidate);
+BOOL sizeEquals(CGFloat expectedWidth, CGFloat expectedHeight, CGSize sizeToValidate);
+BOOL pointEquals(CGFloat expectedX, CGFloat expectedY, CGPoint pointToValidate);
 
-
-@interface MCUIViewLayoutExampleMenuView : UIView
-@property(nonatomic, readonly) UIButton *buttonSetPosition;
-@property(nonatomic, readonly) UIButton *buttonSetRelativePosition;
-@property(nonatomic, readonly) UIButton *buttonSetPositionSizeToFit;
-@property(nonatomic, readonly) UIButton *buttonSpecialCases;
-@end

@@ -1,122 +1,161 @@
+// Copyright (c) 2013, Mirego
+// All rights reserved.
 //
-//  MCUIViewLayoutPositionTest.m
-//  UIViewLayoutExample
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
 //
-//  Created by Mathieu Baron on 05/17/13.
-//  Copyright (c) 2013 Mirego, Inc. All rights reserved.
+// - Redistributions of source code must retain the above copyright notice,
+//   this list of conditions and the following disclaimer.
+// - Redistributions in binary form must reproduce the above copyright notice,
+//   this list of conditions and the following disclaimer in the documentation
+//   and/or other materials provided with the distribution.
+// - Neither the name of the Mirego nor the names of its contributors may
+//   be used to endorse or promote products derived from this software without
+//   specific prior written permission.
 //
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #import "MCUIViewLayoutPositionTest.h"
-#import "RectHelper.h"
+#import "GeometryTestingHelper.h"
 #import "MCUIViewLayoutPosition.h"
 
 @implementation MCUIViewLayoutPositionTest
 
-- (void) testTopLeftInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop | MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(0.0f, 0.0f, 20.0f, 20.0f, rect), @"");
+- (void) testLeftInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(100.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testTopLeftInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop | MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
+- (void) testLeftInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(99, 5, 99, 99)];
 
-    STAssertTrue(rectEquals(5.0f, 5.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(105.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testHCenterInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionHorizontalCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(140.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testHCenterInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionHorizontalCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(99, 99, 99, 5)];
+
+    STAssertTrue(rectEquals(234.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testRightInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(180.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testRightInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(99, 99, 99, 5)];
+
+    STAssertTrue(rectEquals(175.0f, 1000.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testTopInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(1000.0f, 100.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testTopInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 99, 99, 99)];
+
+    STAssertTrue(rectEquals(1000.0f, 105.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testVCenterInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionVerticalCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(1000.0f, 140.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testVCenterInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionVerticalCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 99, 99, 99)];
+
+    STAssertTrue(rectEquals(1000.0f, 46.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testBottomInRectNoMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(1000.0f, 180.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testBottomInRectWithMargin {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(99, 99, 5, 99)];
+
+    STAssertTrue(rectEquals(1000.0f, 175.0f, 20.0f, 20.0f, rect), @"");
+}
+
+- (void) testTopLeftInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTopLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(100.0f, 100.0f, 20.0f, 20.0f, rect), @"");
 }
 
 - (void) testTopRightInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop | MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTopRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(80.0f, 0.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testTopRightInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop | MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(75.0f, 5.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(180.0f, 100.0f, 20.0f, 20.0f, rect), @"");
 }
 
 - (void) testBottomLeftInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom | MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottomLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(0.0f, 80.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testBottomLeftInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom | MCViewPositionLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(5.0f, 75.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(100.0f, 180.0f, 20.0f, 20.0f, rect), @"");
 }
 
 - (void) testBottomRightInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom | MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottomRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(80.0f, 80.0f, 20.0f, 20.0f, rect), @"");
-}
-- (void) testBottomRightInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom | MCViewPositionRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(75.0f, 75.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(180.0f, 180.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testTopInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+- (void) testTopHCenterInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTopHCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(40.0f, 0.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(140.0f, 100.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testTopInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionTop inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
+- (void) testBottomHCenterInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottomHCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(40.0f, 5.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(140.0f, 180.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testBottomInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+- (void) testVCenterLeftInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionVCenterLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(40.0f, 80.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(100.0f, 140.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testBottomInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionBottom inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
+- (void) testVCenterRightInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionVCenterRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(40.0f, 75.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(180.0f, 140.0f, 20.0f, 20.0f, rect), @"");
 }
 
-- (void) testCenterLeftInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenterLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+- (void) testCentersInRect {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenters inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
 
-    STAssertTrue(rectEquals(0.0f, 40.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testCenterLeftInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenterLeft inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(5.0f, 40.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testCenterRightInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenterRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
-
-    STAssertTrue(rectEquals(80.0f, 40.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testCenterRightInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenterRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(75.0f, 40.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testCenterInRect {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
-
-    STAssertTrue(rectEquals(40.0f, 40.0f, 20.0f, 20.0f, rect), @"");
-}
-
-- (void) testCenterInRectWithEdgeInset {
-    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionCenter inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
-
-    STAssertTrue(rectEquals(40.0f, 40.0f, 20.0f, 20.0f, rect), @"");
+    STAssertTrue(rectEquals(140.0f, 140.0f, 20.0f, 20.0f, rect), @"");
 }
 
 - (void) testViewRelativePositionAboveAlignedLeft {
@@ -261,6 +300,30 @@
     CGRect rect = [MCUIViewLayoutPosition relativePositionRect:CGRectMake(1000, 1000, 10, 10) atPosition:MCViewRelativePositionUnderAlignedRight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(5, 5, 5, 5)];
 
     STAssertTrue(rectEquals(185.0f, 205.0f, 10.0f, 10.0f, rect), @"");
+}
+
+- (void)testFitHeightNoMargins {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionFitHeight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(1000.0f, 100.0f, 20.0f, 100.0f, rect), @"");
+}
+
+- (void)testFitHeightWithMargins {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionFitHeight inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(10, 0, 5, 0)];
+
+    STAssertTrue(rectEquals(1000.0f, 110.0f, 20.0f, 85.0f, rect), @"");
+}
+
+- (void)testFitWidthNoMargins {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionFitWidth inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsZero];
+
+    STAssertTrue(rectEquals(100.0f, 1000.0f, 100.0f, 20.0f, rect), @"");
+}
+
+- (void)testFitWidthWithMargins {
+    CGRect rect = [MCUIViewLayoutPosition positionRect:CGRectMake(1000, 1000, 20, 20) atPosition:MCViewPositionFitWidth inRect:CGRectMake(100, 100, 100, 100) withMargins:UIEdgeInsetsMake(0,10,0,5)];
+
+    STAssertTrue(rectEquals(110.0f, 1000.0f, 85.0f, 20.0f, rect), @"");
 }
 
 @end

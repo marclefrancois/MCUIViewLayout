@@ -25,13 +25,45 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-
-#import <Foundation/Foundation.h>
-
-
-@interface MCUIViewLayoutExampleMenuView : UIView
-@property(nonatomic, readonly) UIButton *buttonSetPosition;
-@property(nonatomic, readonly) UIButton *buttonSetRelativePosition;
-@property(nonatomic, readonly) UIButton *buttonSetPositionSizeToFit;
-@property(nonatomic, readonly) UIButton *buttonSpecialCases;
-@end
+//#import "UIViewLayoutExampleTestLog.h"
+//
+//// GCOV Flush function
+//extern void __gcov_flush(void);
+//
+//static id mainSuite = nil;
+//
+//@implementation UIViewLayoutExampleTestLog
+//
+//+ (void)initialize
+//{
+//	[[NSUserDefaults standardUserDefaults] setValue:@"UIViewLayoutExampleTestLog" forKey:SenTestObserverClassKey];
+//	
+//	[super initialize];
+//}
+//
+//+ (void)testSuiteDidStart:(NSNotification *)notification
+//{
+//	[super testSuiteDidStart:notification];
+//	
+//	SenTestSuiteRun *suite = notification.object;
+//	
+//	if (mainSuite == nil)
+//	{
+//		mainSuite = suite;
+//	}
+//}
+//
+//+ (void)testSuiteDidStop:(NSNotification *)notification
+//{
+//	[super testSuiteDidStop:notification];
+//	
+//	SenTestSuiteRun* suite = notification.object;
+//	
+//	if (mainSuite == suite)
+//	{
+//		// workaround for missing flush with iOS 7 Simulator
+//		__gcov_flush();
+//	}
+//}
+//
+//@end

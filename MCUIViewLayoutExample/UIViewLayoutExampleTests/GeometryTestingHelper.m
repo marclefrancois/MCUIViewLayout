@@ -25,13 +25,37 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#import "GeometryTestingHelper.h"
 
-#import <Foundation/Foundation.h>
+BOOL rectEquals(CGFloat expectedX, CGFloat expectedY, CGFloat expectedWidth, CGFloat expectedHeight, CGRect rectToValidate)
+{
+    CGRect expectedRect = CGRectMake(expectedX, expectedY, expectedWidth, expectedHeight);
+    if (!CGRectEqualToRect(expectedRect, rectToValidate))
+    {
+        NSLog(@"expected: %@ actual: %@", NSStringFromCGRect(expectedRect), NSStringFromCGRect(rectToValidate));
+        return NO;
+    }
+    return YES;
+}
 
+BOOL sizeEquals(CGFloat expectedWidth, CGFloat expectedHeight, CGSize sizeToValidate)
+{
+    CGSize expectedSize = CGSizeMake(expectedWidth, expectedHeight);
+    if (!CGSizeEqualToSize(expectedSize, sizeToValidate))
+    {
+        NSLog(@"expected: %@ actual: %@", NSStringFromCGSize(expectedSize), NSStringFromCGSize(sizeToValidate));
+        return NO;
+    }
+    return YES;
+}
 
-@interface MCUIViewLayoutExampleMenuView : UIView
-@property(nonatomic, readonly) UIButton *buttonSetPosition;
-@property(nonatomic, readonly) UIButton *buttonSetRelativePosition;
-@property(nonatomic, readonly) UIButton *buttonSetPositionSizeToFit;
-@property(nonatomic, readonly) UIButton *buttonSpecialCases;
-@end
+BOOL pointEquals(CGFloat expectedX, CGFloat expectedY, CGPoint pointToValidate)
+{
+    CGPoint expectedPoint = CGPointMake(expectedX, expectedY);
+    if (!CGPointEqualToPoint(expectedPoint, pointToValidate))
+    {
+        NSLog(@"expected: %@ actual: %@", NSStringFromCGPoint(expectedPoint), NSStringFromCGPoint(pointToValidate));
+        return NO;
+    }
+    return YES;
+}

@@ -1,4 +1,8 @@
 # MCUIViewLayout - Layouting enhancements to UIView
+[![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/MCUIViewLayout/badge.png)](https://cocoadocs.org/docsets/MCUIViewLayout)
+[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/MCUIViewLayout/badge.png)](https://cocoadocs.org/docsets/MCUIViewLayout)
+[![Build Status](https://travis-ci.org/mirego/MCUIViewLayout.png?branch=master)](https://travis-ci.org/mirego/MCUIViewLayout)
+[![Coverage Status](https://coveralls.io/repos/mirego/MCUIViewLayout/badge.png?branch=master)](https://coveralls.io/r/mirego/MCUIViewLayout?branch=master)
 
 MCUIViewLayout is a category added over [`UIView`](http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIView_Class/)
 to make layouting the views easier. It provide shortcut methods to set width, height, position based without the need
@@ -15,7 +19,7 @@ All methods are prefixed `mc_` at the moment. This is to avoid colisions as desc
 ### Change z-ordering of a view
 
 You've just added a view and need it bellow all other views or the other way
-around? Don't need ot play with the `subviews` array of the `superview`.
+around? Don't need to play with the `subviews` array of the `superview`.
 
 ```objective-c
 - (void)funWithZOrdering
@@ -171,17 +175,25 @@ The different MCViewPosition options:
 ```objective-c
 // MCViewPosition
 typedef NS_OPTIONS(NSInteger, MCViewPosition) {
-    MCViewPositionCenter    = (0x1 << 0), // => 0x00000001
-    MCViewPositionTop       = (0x1 << 1), // => 0x00000010
-    MCViewPositionBottom    = (0x1 << 2), // => 0x00000100
-    MCViewPositionLeft      = (0x1 << 3), // => 0x00001000
-    MCViewPositionRight     = (0x1 << 4), // => 0x00010000
-    MCViewPositionTopLeft     = MCViewPositionTop | MCViewPositionLeft,
-    MCViewPositionTopRight    = MCViewPositionTop | MCViewPositionRight,
-    MCViewPositionBottomLeft  = MCViewPositionBottom | MCViewPositionLeft,
-    MCViewPositionBottomRight = MCViewPositionBottom | MCViewPositionRight,
-    MCViewPositionCenterLeft  = MCViewPositionCenter | MCViewPositionLeft,
-    MCViewPositionCenterRight = MCViewPositionCenter | MCViewPositionRight
+    MCViewPositionHCenter       = (0x1 << 0),
+    MCViewPositionVCenter       = (0x1 << 1),
+    MCViewPositionTop           = (0x1 << 2),
+    MCViewPositionBottom        = (0x1 << 3),
+    MCViewPositionLeft          = (0x1 << 4),
+    MCViewPositionRight         = (0x1 << 5),
+
+    MCViewPositionTopLeft       = MCViewPositionTop | MCViewPositionLeft,
+    MCViewPositionTopHCenter    = MCViewPositionTop | MCViewPositionHCenter,
+    MCViewPositionTopRight      = MCViewPositionTop | MCViewPositionRight,
+
+    MCViewPositionBottomLeft    = MCViewPositionBottom | MCViewPositionLeft,
+    MCViewPositionBottomHCenter = MCViewPositionBottom | MCViewPositionHCenter,
+    MCViewPositionBottomRight   = MCViewPositionBottom | MCViewPositionRight,
+
+    MCViewPositionVCenterLeft   = MCViewPositionVCenter | MCViewPositionLeft,
+    MCViewPositionCenters       = MCViewPositionVCenter | MCViewPositionHCenter,
+    MCViewPositionVCenterRight  = MCViewPositionVCenter | MCViewPositionRight
+
 };
 ```
 
@@ -256,11 +268,6 @@ See the [`LICENSE.md`](https://github.com/mirego/MCUIViewLayout/blob/master/LICE
 
 ## About Mirego
 
-Mirego is a team of passionate people who believe that work is a place where you can innovate and have fun.
-We proudly built mobile applications for
-[iPhone](http://mirego.com/en/iphone-app-development/ "iPhone application development"),
-[iPad](http://mirego.com/en/ipad-app-development/ "iPad application development"),
-[Android](http://mirego.com/en/android-app-development/ "Android application development"),
-[Blackberry](http://mirego.com/en/blackberry-app-development/ "Blackberry application development"),
-[Windows Phone](http://mirego.com/en/windows-phone-app-development/ "Windows Phone application development") and
-[Windows 8](http://mirego.com/en/windows-8-app-development/ "Windows 8 application development").
+[Mirego](http://mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We're a team of [talented people](http://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://mirego.org).
+
+We also [love open-source software](http://open.mirego.com) and we try to give back to the community as much as we can.

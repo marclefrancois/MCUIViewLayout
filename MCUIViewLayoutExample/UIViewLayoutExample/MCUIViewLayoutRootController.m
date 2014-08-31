@@ -29,6 +29,8 @@
 #import "MCUIViewLayoutExampleSetPosition.h"
 #import "MCUIViewLayoutExampleMenuView.h"
 #import "MCUIViewLayoutExampleSetRelativePosition.h"
+#import "MCUIViewLayoutExampleSetPositionSizeToFit.h"
+#import "MCUIViewLayoutExampleSpecialCases.h"
 
 //------------------------------------------------------------------------------
 #pragma mark MCUIViewLayoutRootController (privates methods)
@@ -67,18 +69,38 @@
 #pragma mark Controller events
 //------------------------------------------------------------------------------
 - (void)loadView {
-    MCUIViewLayoutExampleMenuView *rootview = [[MCUIViewLayoutExampleMenuView alloc] init];
+    MCUIViewLayoutExampleMenuView *rootview = [[MCUIViewLayoutExampleMenuView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     [rootview.buttonSetPosition addTarget:self action:@selector(showSetPositionExample) forControlEvents:UIControlEventTouchUpInside];
     [rootview.buttonSetRelativePosition addTarget:self action:@selector(showSetRelativePositionExample) forControlEvents:UIControlEventTouchUpInside];
+    [rootview.buttonSetPositionSizeToFit addTarget:self action:@selector(showSetPositionSizeToFitExample) forControlEvents:UIControlEventTouchUpInside];
+    [rootview.buttonSpecialCases addTarget:self action:@selector(showSpecialCases) forControlEvents:UIControlEventTouchUpInside];
     self.view = rootview;
 }
 
 - (void)showSetRelativePositionExample {
-    [self.view addSubview:[[MCUIViewLayoutExampleSetRelativePosition alloc] initWithFrame:self.view.bounds]];
+    UIView *view = [[MCUIViewLayoutExampleSetRelativePosition alloc] initWithFrame:self.view.bounds];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:view];
 }
 
 - (void)showSetPositionExample {
-    [self.view addSubview:[[MCUIViewLayoutExampleSetPosition alloc] initWithFrame:self.view.bounds]];
+    UIView *view =[[MCUIViewLayoutExampleSetPosition alloc] initWithFrame:self.view.bounds];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:view];
+}
+
+- (void)showSetPositionSizeToFitExample
+{
+    UIView *view =[[MCUIViewLayoutExampleSetPositionSizeToFit alloc] initWithFrame:self.view.bounds];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:view];
+}
+
+- (void)showSpecialCases
+{
+    UIView *view =[[MCUIViewLayoutExampleSpecialCases alloc] initWithFrame:self.view.bounds];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:view];
 }
 
 //- (void)viewDidLoad

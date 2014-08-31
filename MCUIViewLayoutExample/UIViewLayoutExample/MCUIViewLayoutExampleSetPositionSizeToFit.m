@@ -24,36 +24,51 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-
-#import "MCUIViewLayoutExampleSetPosition.h"
+#import "MCUIViewLayoutExampleSetPositionSizeToFit.h"
 #import "MCUIViewExampleUIFactory.h"
+#import "UIView+MCLayout.h"
 
 //------------------------------------------------------------------------------
-#pragma mark - MCUIViewExampleUIFactory
+#pragma mark - MCUIViewLayoutExampleSetPositionSizeToFit
 //------------------------------------------------------------------------------
-@interface MCUIViewExampleUIFactory ()
+@interface MCUIViewLayoutExampleSetPositionSizeToFit ()
+
+@property(nonatomic, strong) UILabel *top;
+@property(nonatomic, strong) UILabel *left;
+@property(nonatomic, strong) UILabel *centered;
+@property(nonatomic, strong) UILabel *right;
+@property(nonatomic, strong) UILabel *bottom;
 
 @end
 
-@implementation MCUIViewExampleUIFactory {
-
-}
+@implementation MCUIViewLayoutExampleSetPositionSizeToFit
 
 //------------------------------------------------------------------------------
 #pragma mark constructors and destructor
 //------------------------------------------------------------------------------
-- (id)init {
-    self = [super init];
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor darkGrayColor];
 
+        self.top = [MCUIViewExampleUIFactory addLabelWithTitle:@"top" inView:self];
+        self.top.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+
+        self.left = [MCUIViewExampleUIFactory addLabelWithTitle:@"leftCentered" inView:self];
+        self.left.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+        self.centered = [MCUIViewExampleUIFactory addLabelWithTitle:@"centered" inView:self];
+        self.centered.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.3];
+        self.right = [MCUIViewExampleUIFactory addLabelWithTitle:@"rightCentered" inView:self];
+        self.right.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+
+        self.bottom = [MCUIViewExampleUIFactory addLabelWithTitle:@"bottom" inView:self];
+        self.bottom.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close)] ];
     }
 
     return self;
 }
-
-//- (void)dealloc {
-//
-//}
 //------------------------------------------------------------------------------
 #pragma mark setters and getters
 //------------------------------------------------------------------------------
@@ -61,16 +76,23 @@
 //------------------------------------------------------------------------------
 #pragma mark public methods
 //------------------------------------------------------------------------------
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    UIEdgeInsets insets = UIEdgeInsetsMake(5, 10, 15, 20);
+
+    [self.top mc_setPosition:MCViewPositionTopHCenter|MCViewPositionFitWidth withMargins:insets];
+    [self.left mc_setPosition:MCViewPositionVCenterLeft|MCViewPositionFitHeight withMargins:insets];
+    [self.bottom mc_setPosition:MCViewPositionBottomHCenter|MCViewPositionFitWidth withMargins:insets];
+    [self.right mc_setPosition:MCViewPositionVCenterRight|MCViewPositionFitHeight withMargins:insets];
+    [self.centered mc_setPosition:MCViewPositionCenters|MCViewPositionFitHeight|MCViewPositionFitWidth withMargins:insets];
+}
 
 //------------------------------------------------------------------------------
 #pragma mark private methods
 //------------------------------------------------------------------------------
-+ (UILabel *)addLabelWithTitle:(NSString *)title inView:(UIView *)view {
-    UILabel *label = [[UILabel alloc] init];
-    label.text = title;
-    label.textAlignment = NSTextAlignmentCenter;
-    [label sizeToFit];
-    [view addSubview:label];
-    return label;
+- (void)close
+{
+    [self removeFromSuperview];
 }
 @end
