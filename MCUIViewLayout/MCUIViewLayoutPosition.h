@@ -75,10 +75,16 @@ typedef NS_OPTIONS(NSInteger, MCViewPosition) {
     MCViewRelativePositionUnderAlignedRight = MCViewPositionRight | MCViewPositionUnder
 };
 
+typedef NS_ENUM(NSInteger , MCViewLayoutOrientation) {
+    MCViewLayoutOrientationVertical,
+    MCViewLayoutOrientationHorizontal
+};
+
 @interface MCUIViewLayoutPosition : NSObject
 
 + (CGRect)positionRect:(CGRect)rect atPosition:(MCViewPosition)position inRect:(CGRect)targetRect withMargins:(UIEdgeInsets const)margins;
 
 + (CGRect)relativePositionRect:(CGRect)rect atPosition:(MCViewPosition)position inRect:(CGRect)targetRect withMargins:(UIEdgeInsets const)margins;
+
 
 @end
